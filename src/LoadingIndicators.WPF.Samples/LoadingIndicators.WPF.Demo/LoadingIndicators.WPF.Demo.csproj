@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Xpf.Sdk/1.5.1">
     <PropertyGroup>
-        <TargetFrameworks>net45;net46;net47</TargetFrameworks>
+        <TargetFrameworks>net6.0-windows</TargetFrameworks>
+        <OutputType>WinExe</OutputType>
+        <UseWpf>true</UseWpf>
         <AssemblyName>LoadingIndicators.WPF.Demo</AssemblyName>
         <RootNamespace>LoadingIndicatorsDemo</RootNamespace>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <EnableWindowsTargeting>true</EnableWindowsTargeting>
     </PropertyGroup>
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
         <NoWarn>SA1652</NoWarn>
-        <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\LoadingIndicators.WPF\LoadingIndicators.WPF.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <None Include="app.manifest" />
-        <None Remove="App.config" />
-        <AppConfigWithTargetPath Include="App.$(TargetFramework).config">
-            <TargetPath>$(AssemblyName).config</TargetPath>
-        </AppConfigWithTargetPath>
-    </ItemGroup>
-    <ItemGroup>
         <Compile DependentUpon="%(Filename)" SubType="Code" Update="**\obj\**\*.g$(DefaultLanguageSourceExtension)" />
         <Compile DependentUpon="%(Filename)" SubType="Designer" Update="**\*.xaml$(DefaultLanguageSourceExtension)" />
     </ItemGroup>
-    <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+    <ItemGroup>
+        <RuntimeHostConfigurationOption Include="AvaloniaUI.Xpf.LicenseKey" Value="$(XpfLicenseKey)"/>
+    </ItemGroup>
 </Project>
